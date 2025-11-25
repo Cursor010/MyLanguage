@@ -1,0 +1,23 @@
+class Program {
+    constructor() {
+        int x = 10;
+        float y = 3.14;
+        bool flag = true;
+        char c = 'A';
+        string name = "Hello";
+        
+        if (x > 5 && flag) {
+            print("x is greater than 5");
+            while (x < 20) {
+                x = x + 1;
+                if (x == 15) {
+                    break;
+                }
+            }
+        } else {
+            read(y);
+        }
+        
+        return 0;
+    }
+}

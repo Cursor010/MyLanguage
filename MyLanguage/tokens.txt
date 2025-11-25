@@ -1,0 +1,54 @@
+# Формат: токен индекс описание
+# Ключевые слова (типы данных)
+int 1 KEYWORD
+char 1 KEYWORD
+bool 1 KEYWORD
+float 1 KEYWORD
+void 1 KEYWORD
+class 1 KEYWORD
+constructor 1 KEYWORD
+
+# Управляющие конструкции
+if 1 KEYWORD
+else 1 KEYWORD
+while 1 KEYWORD
+for 1 KEYWORD
+return 1 KEYWORD
+break 1 KEYWORD
+continue 1 KEYWORD
+
+# Ввод-вывод
+print 1 KEYWORD
+read 1 KEYWORD
+
+# Булевы литералы
+true 7 BOOLEAN
+false 7 BOOLEAN
+
+# Операторы
++ 4 OPERATOR
+- 4 OPERATOR
+* 4 OPERATOR
+/ 4 OPERATOR
+= 4 OPERATOR
+== 4 OPERATOR
+!= 4 OPERATOR
+< 4 OPERATOR
+> 4 OPERATOR
+<= 4 OPERATOR
+>= 4 OPERATOR
+&& 4 OPERATOR
+|| 4 OPERATOR
+! 4 OPERATOR
+
+# Специальные символы
+( 4 OPERATOR
+) 4 OPERATOR
+{ 4 OPERATOR
+} 4 OPERATOR
+[ 4 OPERATOR
+] 4 OPERATOR
+; 4 OPERATOR
+, 4 OPERATOR
+. 4 OPERATOR
+: 4 OPERATOR
