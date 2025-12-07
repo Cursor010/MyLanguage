@@ -20,6 +20,9 @@ void Index();
 void Prime();
 void NameOrCall();
 void CallParamList();
+void Block();
+void Item1();
+void Item2();
 void go_to_next() {}
 pair<string,string> token;
 void Type() {
@@ -266,9 +269,6 @@ void FuncParam() {
   if (token.second != "IDENTIFIER") throw number_re;
   go_to_next();
 }
-void Block() {
-
-}
 void FuncParamList() {
   if (token.first == ")")return;
   FuncParam();
@@ -336,9 +336,6 @@ void ForInit() {
   } else if (token.second == "IDENTIFIER") {
     Expr();
   }
-}
-void Item2() {
-
 }
 void BlockCycle() {
   if (token.first != "{") throw number_re;
@@ -462,5 +459,76 @@ void Program() {
   while (token.second != "EOF") {
     go_to_next();
     Item();
+  }
+}
+void Return() {
+  if (token.first != "return") throw number_re;
+  go_to_next();
+  if (token.first != ";") {
+    Expr();
+  }
+
+  if (token.first != ";") throw number_re;
+  go_to_next();
+}
+
+void Item1() {//не уверен в корректности
+  // <Init>
+  if (token.second == "INIT" && token.first != "void") {
+    Init();
+    return;
+  }
+  // <Return>
+  if (token.first == "return") {
+    Return();
+    return;
+  }
+  if (token.second == "KEYWORD" || token.first == "IDENTIFIER" || token.first == "INTEGER" || token.first == "FLOAT" || token.first == "STRING_LITERAL") {
+    Reg();
+  }
+}
+
+void Block() {
+  if (token.first != "{") throw number_re;
+  go_to_next();
+  while (token.first != "}") {
+    Item1();
+  }
+  go_to_next();
+}
+void Break() {
+  if (token.first != "break") throw number_re;
+  go_to_next();
+
+  if (token.first != ";") throw number_re;
+  go_to_next();
+}
+void Continue() {
+  if (token.first != "continue") throw number_re;
+  go_to_next();
+
+  if (token.first != ";") throw number_re;
+  go_to_next();
+}
+
+void Item2() {
+  if (token.second == "INIT" && token.first != "void") {
+    Init();
+    return;
+  }
+  if (token.first == "break") {
+    Break();
+    return;
+  }
+  if (token.first == "continue") {
+    Continue();
+    return;
+  }
+  if (token.first == "return") {
+    Return();
+    return;
+  }
+  if (token.second == "KEYWORD" || token.first == "IDENTIFIER" || token.first == "INTEGER" || token.first == "FLOAT" || token.first == "STRING_LITERAL") {
+    Reg();
   }
 }
