@@ -1,54 +1,68 @@
 # Формат: токен индекс описание
 # Ключевые слова (типы данных)
-int 1 KEYWORD
-char 1 KEYWORD
-bool 1 KEYWORD
-float 1 KEYWORD
-void 1 KEYWORD
-class 1 KEYWORD
-constructor 1 KEYWORD
+int 1 INIT
+char 1 INIT
+bool 1 INIT
+float 1 INIT
+void 1 INIT
+string 1 INIT
+vector 1 INIT
+
 
 # Управляющие конструкции
-if 1 KEYWORD
-else 1 KEYWORD
-while 1 KEYWORD
-for 1 KEYWORD
-return 1 KEYWORD
-break 1 KEYWORD
-continue 1 KEYWORD
+def         1  KEYWORD
+if          1  KEYWORD
+else        1  KEYWORD
+elif        1  KEYWORD
+while       1  KEYWORD
+do          1  KEYWORD
+for         1  KEYWORD
+return      1  KEYWORD
+break       1  KEYWORD
+continue    1  KEYWORD
+
 
 # Ввод-вывод
-print 1 KEYWORD
-read 1 KEYWORD
+print       1  KEYWORD
+read        1  KEYWORD   
+
 
 # Булевы литералы
-true 7 BOOLEAN
-false 7 BOOLEAN
+true        7  BOOLEAN
+false       7  BOOLEAN
+
+INTEGER     6  INTEGER   // 123
+FLOAT       6  FLOAT     // 12.34
+STRING      6  STRING_LITERAL  // "text"
+
+IDENTIFIER  5  IDENTIFIER   // имя функции, массива и тп
 
 # Операторы
-+ 4 OPERATOR
-- 4 OPERATOR
-* 4 OPERATOR
-/ 4 OPERATOR
-= 4 OPERATOR
-== 4 OPERATOR
-!= 4 OPERATOR
-< 4 OPERATOR
-> 4 OPERATOR
-<= 4 OPERATOR
->= 4 OPERATOR
-&& 4 OPERATOR
-|| 4 OPERATOR
-! 4 OPERATOR
++    4 OPERATOR
+-    4 OPERATOR
+*    4 OPERATOR
+/    4 OPERATOR
+%    4 OPERATOR
+=    4 OPERATOR
+==   4 OPERATOR
+!=   4 OPERATOR
+<    4 OPERATOR
+>    4 OPERATOR
+<=   4 OPERATOR
+>=   4 OPERATOR
+&&   4 OPERATOR
+||   4 OPERATOR
+!    4 OPERATOR
+
 
 # Специальные символы
-( 4 OPERATOR
-) 4 OPERATOR
-{ 4 OPERATOR
-} 4 OPERATOR
-[ 4 OPERATOR
-] 4 OPERATOR
-; 4 OPERATOR
-, 4 OPERATOR
-. 4 OPERATOR
-: 4 OPERATOR
+(    4 OPERATOR
+)    4 OPERATOR
+{    4 OPERATOR
+}    4 OPERATOR
+[    4 OPERATOR
+]    4 OPERATOR
+;    4 OPERATOR
+,    4 OPERATOR
+.    4 OPERATOR
+:    4 OPERATOR

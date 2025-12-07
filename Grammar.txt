@@ -1,0 +1,142 @@
+<Program> ::= <Item> { <Item> }
+
+<Item> ::= "def" <Function>
+        | <Init>
+        | <Reg>
+
+
+/* =====================
+   ИНИЦИАЛИЗАЦИИ
+   ===================== */
+
+<Init> ::= (<TypeName>
+        | "vector" <Array>
+        | "string" <String>) ";"
+
+<TypeName> ::= <Type> <Name1> { "," <Name1> }
+<Name1> ::= <Name> [ "=" <Expr> ]
+
+<Array> ::= "<" <Type> ">" <ArrayInit>
+<ArrayInit> ::= <Array1> { "," <Array1> }
+<Array1> ::= <Name> [ <Assign> | <IndexInit> ]
+<IndexInit> ::= "[" <Expr> "]"
+
+<String> ::= <StringInit>
+<StringInit> ::= <String1> { "," <String1> }
+<String1> ::= <Name> [ "=" <StringLiteral> ]
+<StringLiteral> ::= "\"" { <Char> } "\""
+
+
+/* =====================
+   ЛЕКСИКА
+   ===================== */
+
+<Name> ::= <Char> { <Char> | <Digit> }
+<Char> ::= [A-Za-z_]
+<Digit> ::= [0-9]
+
+<Type> ::= "bool" | "int" | "char" | "float"
+
+
+/* =====================	
+   ВЫРАЖЕНИЯ
+   ===================== */
+
+<Assign> ::= "=" "{" <AssignExpr> { "," <AssignExpr> } "}"
+
+<Expr> ::= <AssignExpr> { "," <AssignExpr> }
+
+<AssignExpr> ::= <ORExpr> [ "=" <AssignExpr> ]
+
+<ORExpr> ::= <AndExpr> { "||" <AndExpr> }
+<AndExpr> ::= <EqualExpr> { "&&" <EqualExpr> }
+
+<EqualExpr> ::= <AddExpr>
+               { ("==" | "!=" | "<" | ">" | "<=" | ">=") <AddExpr> }
+
+<AddExpr> ::= <MullExpr> { ("+" | "-") <MullExpr> }
+<MullExpr> ::= <UnExpr> { ("*" | "/" | "%") <UnExpr> }
+
+<UnExpr> ::= [ "+" | "-" | "!" ] <PostfixExpr>
+
+<PostfixExpr> ::= <Prime> [ <Index> ]
+<Index> ::= "[" <Expr> "]"
+
+
+/* =====================
+   ПЕРВИЧНЫЕ ВЫРАЖЕНИЯ
+   ===================== */
+
+<Prime> ::= <NumberLiteral>
+          | <NameOrCall>
+          | "(" <Expr> ")"
+
+<NameOrCall> ::= <Name> [ "(" <CallParamList> ")" ]
+
+<CallParamList> ::= [ <AssignExpr> { "," <AssignExpr> } ]
+
+<NumberLiteral> ::= <Int> | <Float>
+<Int> ::= <Digit> { <Digit> }
+<Float> ::= <Digit> { <Digit> } "." <Digit> { <Digit> }
+
+
+/* =====================
+   ФУНКЦИИ
+   ===================== */
+
+<Function> ::= ( <Type> | "void" )
+               <Name>
+               "(" <FuncParamList> ")"
+               <Block>
+
+<FuncParamList> ::= [ <FuncParam> { "," <FuncParam> } ]
+<FuncParam> ::= <Type> <Name>
+
+
+/* =====================
+   БЛОКИ И ОПЕРАТОРЫ
+   ===================== */
+
+<Block> ::= "{" <Item1> { <Item1> } "}"
+<Item1> ::= <Init> | <Reg> | <Return>
+
+<Return> ::= "return" [ <Expr> ] ";"
+
+
+/* =====================
+   ОПЕРАТОРЫ УПРАВЛЕНИЯ
+   ===================== */
+
+<Reg> ::= <IF>
+        | <For>
+        | <While>
+        | <DoWhile>
+        | <Expr> ";"
+        | <Print> ";"
+
+<Print> ::= "print" "(" <AssignExpr> { "," <AssignExpr> } ")"
+
+
+<IF> ::= "if" "(" <Expr> ")" <Block>
+         { "elif" "(" <Expr> ")" <Block> }
+         [ "else" <Block> ]
+
+
+<While> ::= "while" "(" <Expr> ")" <BlockCycle>
+
+<DoWhile> ::= "do" <BlockCycle> "while" "(" <Expr> ")" ";"
+
+
+<For> ::= "for" "(" [<ForInit>] ";" [<Expr>] ")" <BlockCycle>
+<ForInit> ::= <TypeName> | <Expr> | ε
+
+
+<BlockCycle> ::= "{"{ <Item2> } "}"
+<Item2> ::= <Init>
+          | <Reg>
+          | <Break>
+          | <Continue>
+          | <Return>
+
+<Break> ::= "break" ";"
+<Continue> ::= "continue" ";"
