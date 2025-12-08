@@ -14,7 +14,7 @@
         | "string" <String>) ";"
 
 <TypeName> ::= <Type> <Name1> { "," <Name1> }
-<Name1> ::= <Name> [ "=" <Expr> ]
+<Name1> ::= <Name> [ "=" <AssignExpr> ]
 
 <Array> ::= "<" <Type> ">" <ArrayInit>
 <ArrayInit> ::= <Array1> { "," <Array1> }
