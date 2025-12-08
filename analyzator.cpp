@@ -34,8 +34,12 @@ void Type() {
 }
 void Name1() {
   if (token.second != "IDENTIFIER") {
-    go_to_next();
     throw number_re;
+  }
+  go_to_next();
+  if(token.first == "="){
+    go_to_next();
+    AssignExpr();
   }
 }
 // ================= NumberLiteral =================
@@ -457,7 +461,6 @@ void Item() {
 void Program() {
   token = give_token();
   while (token.second != "EOF") {
-    go_to_next();
     Item();
   }
 }
